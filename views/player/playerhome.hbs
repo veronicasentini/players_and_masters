@@ -1,0 +1,68 @@
+{{>headerUser}}
+
+<form action="" class="playerhome clearfix">
+<div class="menuplayer">
+  <ul >
+    <li class="menu-item collezionePers">Personaggi Posseduti</li>
+    <li class="menu-item acquisisciPers">Personaggi Acquistabili</li>
+  </ul>
+</div>
+<div class="contenuti">
+<div class="personaggiPoss" > 
+<form id="griglia-personaggi" class="clearfix">
+  <div id="intestazioneForm">
+    <p >personaggi posseduti</p>
+</div>
+<table style="background-color: white; width:100%">
+  <tbody>
+    <tr>
+      <td>nome personaggio</td>
+       <td>classe</td>
+        <td><img src="https://i.ibb.co/k8K1k5K/trash.png" alt="trash" class="elimina" border="0"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="personaggiAcq " >
+  <form id="griglia-personaggi" class="clearfix">
+<div id="intestazioneForm">
+    <p >personaggi acquistabili </p>
+</div>
+<table style="background-color:white; width:100%">
+  <tbody>
+    <tr>
+      <td>nome personaggio</td>
+       <td>classe</td>
+        <td> <img src="https://i.ibb.co/QrfR2nD/piu-png-8.png" alt="piu-png-8" class="elimina"border="0"></td>
+    </tr>
+  </tbody>
+</table>
+</form>
+</div>
+</div>
+</form>
+
+<!-- inclusione jquery-->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+  $ (document) .ready (function () {
+       $(".personaggiAcq").hide();
+$(".acquisisciPers").click(function(e){ 
+  $(".personaggiAcq").show();
+    $(".personaggiPoss").hide();
+   e.preventDefault();
+},
+);
+    });
+$ (document) .ready (function () {
+$(".collezionePers").click(function(e){ 
+  $(".personaggiAcq").hide();
+    $(".personaggiPoss").show();
+   e.preventDefault();
+},
+);
+    });
+
+
+</script>

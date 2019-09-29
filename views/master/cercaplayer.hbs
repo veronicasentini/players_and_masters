@@ -1,0 +1,101 @@
+<form id="ricerca" class="clearfix">
+    <div id="intestazioneForm" style="font-size:25px" >Ricerca players</div>
+   <div class="filtri all_orizz">
+      <div style="margin-left: 5px;">
+       <p style="font-weight: bold; font-size:20px">FILTRI</p>
+
+  <!-- CASELLE DI TESTO -->
+ <p style="font-style: italic; font-size:18px; ">Nome Utente<br>
+  <input type="text" class="mail-password" name="name"></p>
+ <p style="font-style: italic; font-size:18px; ">Email<br>
+  <input type="text" class="mail-password" name="email"></p>
+  
+  <!-- CHECKBOX -->
+  <!--<p style="font-style: italic; font-size:18px; ">Classe</p>-->
+
+  <button class="dropdown-btn active classe-btn " type="button">Classe
+    <i class="fa fa-caret-down"></i>
+  </button>
+ 
+  <div class="dropdown-container" >
+   <input type="checkbox" name="classe" > Barbaro
+  <input type="checkbox" name="classe" > Bardo<br>
+  <input type="checkbox" name="classe" > Chierico
+  <input type="checkbox" name="classe" > Druido<br>
+<input type="checkbox" name="classe" > Guerriero
+<input type="checkbox" name="classe" > Ladro<br>
+<input type="checkbox" name="classe" > Mago
+<input type="checkbox" name="classe" > Monaco<br>
+<input type="checkbox" name="classe" > Paladino
+<input type="checkbox" name="classe" > Ranger<br>
+<input type="checkbox" name="classe" > Stregone
+<input type="checkbox" name="classe" > Warlock<br>
+  </div>
+
+  
+ <br/> 
+ <br/> 
+<button class="dropdown-btn active classe-btn " type="button">Razza
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+   <input type="checkbox" name="razza" > Umano
+    <input type="checkbox" name="razza" > Mezzelfo<br>
+     <input type="checkbox" name="razza" >Elfo 
+      <input type="checkbox" name="razza" > Mezzorco<br>
+       <input type="checkbox" name="razza" >Dragonide 
+        <input type="checkbox" name="razza" > Halfling<br>
+         <input type="checkbox" name="razza" >Tifling 
+          <input type="checkbox" name="razza" >Nano <br>
+           <input type="checkbox" name="razza" >Gnomo 
+            <input type="checkbox" name="razza" >Felinide <br>
+             <input type="checkbox" name="razza" >Centauro 
+             <input type="checkbox" name="razza" >Aasimar <br>
+</div></div> 
+  <div id="cerca"> <button type="submit" name="cerca" class="bottone-conferma" >Cerca</button></div>
+ 
+</div>
+<div id="risultato" style="background-color: brown" class="all_orizz risultato">
+  <table class="risultato_mostrato">
+      <thead>
+		<tr><th>User</th>
+        <th>email</th>
+        <th>personaggio</th>
+        <th>classe</th>
+        <th>razza</th>
+        <th>allineamento</th>
+        <th>for</th>
+        <th>des</th>
+        <th>cos</th>
+        <th>int</th>
+        <th>sag</th>
+        <th>car</th>
+
+
+        </tr>
+        <tbody>
+		<tr><td>cell</td><td>cell</td><td>cell</td><td>cell</td><td>cell</td><td>cell</td><td>cell</td><td>cell</td><td>cell</td><td>cell</td><td>cell</td><td>cell</td></tr>
+	</tbody>
+	</thead>
+  </table>
+</div>
+
+<script>
+      var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+  </script>
+</form>
+
+

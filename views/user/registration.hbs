@@ -1,0 +1,26 @@
+<form id="registration" align="center" action="/registration">
+    <div id="intestazioneForm">
+        <p style="color: white; font-size:16px"> REGISTRAZIONE</p>
+    </div>
+    <div class="mail">
+        <p>Email:<br/>
+            <input class="mail-password" type="text" name="mail">
+
+        </p>
+    </div>
+    <div class="password">
+        <p>password: <br/>
+            <input class="mail-password" type="password">
+        </p>
+        <p>Ripeti password: <br/>
+            <input class="mail-password" type="password">
+        </p>
+
+    </div>
+    
+    <input type="hidden" name="_csrf" value="{{csrfToke}}">
+    <div id="buttons">
+        <button type="button" class="bottoni-acc-reg" href='/'>Registrati</button>
+    </div>
+  
+</form> 
