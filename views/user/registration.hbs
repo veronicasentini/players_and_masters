@@ -1,7 +1,15 @@
-<form id="registration" align="center" method="POST" action="/registration" >
+{{#if hasError }}
+    <div id="messaggioErrore">
+        {{#each messages}}
+        <p name="messaggioErrore" class="messaggioErrore" display="hide">{{this}} </p>
+    {{/each}}
+    </div>
+    {{/if}}
+    <form id="registration" align="center" method="POST" action="/registration" >
     <div id="intestazioneForm">
         <p style="color: white; font-size:16px"> REGISTRAZIONE</p>
     </div>
+    
     <div class="username">
          <p>Username:<br/>
             <input class="mail-password" type="text" name="username">

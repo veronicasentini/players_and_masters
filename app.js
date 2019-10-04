@@ -11,7 +11,7 @@ var flash = require('connect-flash');
 var createError = require('http-errors');
 
 
-const userController = require('./controller/user');
+/*const userController = require('./controller/userController');*/
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

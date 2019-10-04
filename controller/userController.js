@@ -1,31 +1,13 @@
-var express = require('express');
-var router = express.Router();
-var sqlite3 = require('sqlite3').verbose();
-const database = './players_and_masters.db';
+var db = require('./db');
 var bcrypt = require('bcrypt-nodejs');
 
-/*var userController = require('./controller/userController');*/
+/**definire database, apertura e chiusura
+ * definire gli errori
+ * definire le funzioni solo con  req,res,done
+ * 
+ */
 
-
-
-
-router.use('/user', require('./users.js'));
-/* GET home page. */
-router.get('/', function(req, res, next) {
-    res.render('user/login', { title: 'P&M' });
-});
-
-router.post('/', function(req, res, next) {
-    res.render('player/playerhome');
-});
-
-router.get('/registration', function(req, res, next) {
-    var messages = req.flash('error');
-    res.render('user/registration', { messages: messages, hasErrors: messages.length > 0 });
-});
-
-
-router.post('/registration', function addUser(req, res, done) {
+function addUser(req, res, done) {
 
     let db = new sqlite3.Database(database);
 
@@ -42,27 +24,7 @@ router.post('/registration', function addUser(req, res, done) {
 
             if (row != undefined) {
 
-                res.redirect('/registration');
-
                 return done(null, false, { message: 'Nome utente già in uso' });
-
-            } else if (username == '') {
-
-                res.redirect('/registration');
-
-                return done(null, false, { message: 'Campo nome utente vuoto' });
-
-            } else if (email == '') {
-
-                res.redirect('/registration');
-
-                return done(null, false, { message: 'Campo email vuoto' });
-
-            } else if (password.length < 6) {
-
-                res.redirect('/registration');
-
-                return done(null, false, { message: 'Password troppo breve' });
 
             } else {
 
@@ -73,15 +35,11 @@ router.post('/registration', function addUser(req, res, done) {
 
                         if (row != undefined) {
 
-                            res.redirect('/registration');
-
                             return done(null, false, { message: 'Email già in uso' });
 
                         } else {
 
                             if (password_confirm != password) {
-
-                                res.redirect('/registration');
 
                                 return done(null, false, { message: 'Le password inserite non coincidono' })
 
@@ -104,6 +62,42 @@ router.post('/registration', function addUser(req, res, done) {
 
     db.close();
 
-});
+}
 
-module.exports = router;
+function login(req, res, done) {
+
+    let db = new sqlite3.Database(database);
+
+    var email = req.body.email;
+
+    db.get(
+        'SELECT * FROM users WHERE email = ?',
+        email,
+        function(row, password) {
+            if (row != undefined) {
+                if (bcrypt.compareSync(password, row.password)) {
+                    verified = true;
+                    session = req.session;
+                    session.user = row.id;
+                    res.redirect('/user');
+                } else {
+                    res.redirect('/');
+                    return done(null, false, { message: 'Password errata' });
+                }
+            } else {
+                res.redirect('/');
+                return done(null, false, { message: 'Email non registrata' });
+            }
+        }
+    );
+
+    db.close();
+
+}
+
+function logout(req, res) {
+
+    req.session.user = undefined;
+    res.redirect('/');
+
+}

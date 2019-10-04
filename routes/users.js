@@ -4,13 +4,14 @@ var sqlite3 = require('sqlite3').verbose();
 const database = './players_and_masters.db';
 /* GET users listing. */
 
-router.get('/player', function(req, res) {
+/*router.get('/player', function(req, res) {
     res.render('player/playerhome');
-});
-/*router.get('/player', function loadPG(req, res, done) {
-    console.log("entra nel metodo");
-    let db = new sqlite3.Database(database);
+});*/
+router.get('/player', function loadPG(req, res, done) {
+
     //Caricamento pg per eventuale aggiunta a collezione lato player
+
+    let db = new sqlite3.Database(database);
 
     db.all(
         'SELECT * FROM characters',
@@ -18,7 +19,13 @@ router.get('/player', function(req, res) {
         function(err, rows) {
             num = rows.length;
             console.log(rows.length);
-            var risultati = new Array[num][3];
+            var risultati = new Array(num);
+            for (var i = 0; i < num; i++) {
+                risultati[i] = [];
+                for (var j = 0; j < 3; j++) {
+                    risultati[i][j] = undefined;
+                }
+            }
 
             for (i = 0; i < num; i++) {
 
@@ -39,14 +46,16 @@ router.get('/player', function(req, res) {
             }
 
             table += "</table>";
-
-            document.getElementById(".nonPosseduti").innerHTML = table;
+            console.log(risultati);
+            var element = document.getElementById("nonPosseduti");
+            element.innerHTML = table;
 
         }
 
     );
     res.render('player/playerhome');
-});*/
+});
+
 
 
 router.get('/master', function(req, res) {
