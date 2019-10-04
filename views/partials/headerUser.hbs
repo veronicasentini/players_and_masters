@@ -1,0 +1,24 @@
+<div class="header-user clearfix">
+  <a href="" class="menu-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </a>
+<ul class="header-menu animate">
+  <li class="header-menu-item"><a href="/user/player" method="GET">Area Player</a></li>
+  <li class="header-menu-item"><a href="/user/master">Area Master</a></li>
+  <li class="header-menu-item"><a href="/">Logout</a></li>
+</ul>
+</div>
+
+<!-- inclusione jquery-->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+$(".menu-icon").click(function(e){
+  $(".header-menu").toggleClass('isOpen');
+  e.preventDefault();
+})
+  });
+</script>

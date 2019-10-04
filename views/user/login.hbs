@@ -1,0 +1,50 @@
+
+
+<form id="login" method="POST" action="/">
+    <div id="intestazioneForm" >
+        <p style="color: white"> LOGIN</p>
+    </div>
+
+    {{#if hasErrors}}
+
+    <div id="messaggioErrore">
+        {{#each messages}}
+        <p name="messaggioErrore" class="messaggioErrore" display="hide">ciao stai a sbaglia tutto </p>
+    {{/each}}
+    </div>
+    {{/if}}
+    <div class="mail">
+        <p style="font-weight: bold">Email:<br/>
+            <input class="mail-password" type="text" name="mail">
+
+        </p>
+    </div>
+    <div class="password">
+        <p style="font-weight: bold">Password: <br/>
+            <input class="mail-password" type="password">
+        </p>
+
+    
+ 
+   
+    <div id="buttons">
+        <button type="submit" class="bottoni-acc-reg" style="background-color: darkorange; color:white" onClick='/user/player' >Accedi</button>
+    </div>
+    </div>
+   <div class="dropdown">
+  
+  
+</div>
+
+    <hr/>
+    <p style="font-weight: bold">non sei ancora registrato? <a href='/registration'>registrati ora</a></p>
+
+  
+</form> 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+
+$ (document) .ready (function () {
+       $(".messaggioErrore").hide();});
+       </script>

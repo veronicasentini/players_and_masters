@@ -1,0 +1,514 @@
+#header {
+    top: 0px;
+    height: 20%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+img#logo {
+    margin: 0 auto;
+    height: 100%;
+    width: 50%;
+}
+
+#footer {
+    background-color: black;
+    bottom: 0px;
+    margin-bottom: 0px;
+    left: 0;
+    height: 70px;
+    color: white;
+    width: 100%;
+    font-style: italic;
+    font-size: 12px;
+    flex-shrink: 0;
+    text-align: center;
+    clear: both;
+    position: fixed;
+}
+
+#spacer {
+    margin-bottom: 70px;
+}
+
+.contenuti {
+    width: 100%;
+    background-color: red;
+}
+
+body {
+    background-image: url('https://vignette.wikia.nocookie.net/dd-5e-italiano/images/5/50/Wiki-background/revision/latest?cb=20180629122531&path-prefix=it');
+    height: 100%;
+    margin: 0px;
+    padding-bottom: 70px;
+    min-height: 100%;
+    position: relative;
+}
+
+
+/*Modifiche all'header User*/
+
+.header-user {
+    background-color: #1b1919e7;
+}
+
+.header-menu {
+    margin: 0;
+    padding: 0px;
+    float: right;
+}
+
+.header-menu-item {
+    display: inline-block;
+}
+
+.header-menu-item a {
+    color: white;
+    display: block;
+    padding: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.header-menu-item a:hover {
+    background-color: black;
+}
+
+
+/*icona fruibile da mobile*/
+
+.menu-icon {
+    display: block;
+    float: right;
+    padding: 20px;
+    display: none;
+}
+
+.menu-icon span {
+    display: block;
+    height: 3px;
+    width: 30px;
+    background-color: white;
+    margin-bottom: 3px;
+}
+
+
+/*modifiche al login*/
+
+#login {
+    background-color: rgba(240, 248, 255, 0.5);
+    border-radius: 10px;
+    text-align: center;
+    border-color: black;
+    border-style: inset;
+    border-width: 2px;
+    margin: 0 auto;
+    width: 60%;
+    margin-top: 20px;
+    position: relative;
+}
+
+.messaggioErrore {
+    background-color: rgba(255, 0, 0, 0.5);
+    border-color: darkred;
+    border-style: solid;
+    border-width: 1px;
+    color: white;
+}
+
+#registration {
+    background-color: rgba(240, 248, 255, 0.5);
+    border-radius: 10px;
+    text-align: center;
+    border-color: black;
+    border-style: inset;
+    border-width: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    margin-top: 20px;
+}
+
+form#ricerca {
+    background-color: rgba(240, 248, 255, 0.5);
+    border-radius: 10px;
+    text-align: left;
+    border-color: black;
+    border-style: inset;
+    border-width: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    margin-top: 20px;
+}
+
+div#intestazioneForm {
+    background-color: darkorange;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    margin-top: 0px;
+    height: 10%;
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+}
+
+input.mail-password {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: black;
+    margin-top: -10px;
+    width: 60%;
+}
+
+button.bottoni-acc-reg {
+    border-radius: 10px;
+    background-color: darkorange;
+    color: white;
+    border-style: solid;
+    border-width: 0.5px;
+    height: 28px;
+    width: 80px;
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
+
+button.choose-btn {
+    margin-top: 60 px;
+    height: 80px;
+    margin-bottom: 30px;
+}
+
+.titolo-scheda {
+    font-style: italic;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: darkorange;
+}
+
+button.bottone-conferma {
+    text-align: "right";
+    border-radius: 10px;
+    background-color: darkorange;
+    color: black;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    height: 40px;
+    width: 110px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
+
+select#valore-statistiche {
+    margin-left: 5px;
+}
+
+.statistiche {
+    font-size: 16px;
+    font-style: italic;
+}
+
+#griglia-personaggi {
+    background-color: rgba(240, 248, 255, 0.5);
+    border-radius: 10px;
+    text-align: center;
+    border-color: black;
+    border-style: inset;
+    border-width: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    margin-top: 20px;
+}
+
+div.filtri {
+    width: 25%;
+    float: left;
+    border-style: solid;
+    border-width: 0.5px;
+}
+
+div#risultato {
+    float: left;
+    background-color: brown;
+    width: 75%;
+    border-top-style: solid;
+    border-top-color: black;
+    border-top-width: 0.5px;
+}
+
+.risultato_mostrato {
+    width: 100%;
+}
+
+.all-orizz {
+    display: inline-block;
+}
+
+.dropdown-container {
+    display: none;
+    padding-left: 8px;
+    border-style: solid;
+    border-width: 0.5px;
+    background-color: rgba(240, 199, 118, 0.5);
+    width: 90%;
+    border-radius: 10px;
+}
+
+.active {
+    background-color: green;
+    color: white;
+}
+
+.classe-btn {
+    border-radius: 10px;
+    background-color: #7c1414e7;
+    color: black;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    height: 40px;
+    width: 110px;
+}
+
+.area-player-master {
+    color: black;
+    font-weight: bold;
+    font-family: 'Impact';
+    font-size: 35px;
+}
+
+
+/*-------------PLAYER HOME------------------*/
+
+.playerhome {
+    clear: both;
+    width: 100%;
+    margin-top: 40px;
+    /*border-color: black;
+    border-style: solid;*/
+}
+
+.menuplayer {
+    margin: 0;
+    padding: 0px;
+    float: right;
+}
+
+.menu-item {
+    background-color: darkred;
+    border: 1px solid red;
+    border-radius: 10px;
+    color: white;
+    display: inline-block;
+    padding: 15px;
+    margin: 5px;
+}
+
+.menu-item:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+
+/*usato per i contenuti del player e del master dove sta il menu*/
+
+.contenuti {
+    border-radius: 10px;
+    width: 100%;
+}
+
+
+/*bottone per vedere la collezione dei personaggi*/
+
+.collezionePers {
+    background-color: darkred;
+}
+
+
+/*bottone per vedere i personaggi acquistabili */
+
+.acquisisciPers {
+    background-color: rgb(202, 89, 52);
+}
+
+.schedePers {
+    background-color: coral;
+}
+
+
+/*form per vedere i personaggi posseduti*/
+
+.personaggiPoss {
+    width: 100%;
+    float: left;
+}
+
+
+/*form per vedere i personaggi acquistabili*/
+
+.personaggiAcq {
+    width: 100%;
+    float: left;
+}
+
+
+/*-----------------MASTER HOME------------*/
+
+.menumaster {
+    margin: 0;
+    padding: 0px;
+    float: left;
+    width: 100%;
+}
+
+.collezioneParty {
+    background-color: darkred;
+}
+
+.creazioneParty {
+    background-color: rgb(202, 89, 52);
+}
+
+.partyAttivi {
+    width: 100%;
+    float: left;
+}
+
+.creaParty {
+    width: 100%;
+    float: left;
+}
+
+
+/*classe utile per far chiudere un elemento*/
+
+.isClose {
+    height: 0px;
+    overflow: hidden;
+}
+
+
+/*bottone elimina*/
+
+.elimina {
+    width: 20px;
+    height: 20px;
+    border: 0.5px solid black;
+    border-radius: 3px;
+    padding: 2px;
+}
+
+
+/*bottone aggiungi*/
+
+.aggiungi {
+    width: 20px;
+    height: 20px;
+    border: 0.5px solid black;
+    border-radius: 3px;
+}
+
+
+/*------------------ SCHEDE PERSONAGGI------------------*/
+
+section.cards {
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+    width: 100%;
+    margin: 40px auto;
+    float: left;
+    background-color: rgba(240, 248, 255, 0.5);
+}
+
+div.card {
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    width: 30%;
+    margin: 1% 1.6%;
+    float: left;
+    background-color: rgba(240, 248, 255, 0.5);
+}
+
+.personag {
+    width: 70%;
+    height: auto;
+    margin: 0 auto;
+}
+
+h2.nPg {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    border-color: darkred;
+    border-style: double;
+    border-width: 4px;
+    text-align: center;
+}
+
+p.descrizionePg {
+    color: black;
+    font-size: 18px;
+}
+
+
+/*--------------------------------
+STYLE PER I MOBILE
+----------------------------------*/
+
+@media(max-width: 767px) {
+    .menu-icon {
+        display: block;
+    }
+    .header-menu {
+        width: 100%;
+        height: 0px;
+        overflow: hidden;
+    }
+    .header-menu-item {
+        display: block;
+    }
+    .isOpen {
+        overflow: auto;
+        height: 100%;
+    }
+    h2.area-player-master {
+        color: black;
+        font-weight: bold;
+        font-family: 'Impact';
+    }
+    div#intestazioneForm {
+        font-size: 15px;
+    }
+    .menuplayer_item {
+        display: inline-block;
+    }
+    .menu-item {
+        font-size: 15px;
+        display: inline-block;
+        height: 10%;
+        width: 70%;
+        padding: 5px;
+    }
+    li.menu-item {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .filtri {
+        display: none;
+    }
+    /* cards personaggi*/
+    div.card {
+        width: 80%;
+        margin: 1.5% 10%;
+    }
+    div#intestazioneForm {
+        font-size: 25px;
+    }
+}
