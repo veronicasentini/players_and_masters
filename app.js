@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var expressHbs = require('express-handlebars');
 var session = require('express-session');
 var flash = require('connect-flash');
+var errors = require('express-validator-errors');
 
 var createError = require('http-errors');
 
