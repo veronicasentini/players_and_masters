@@ -1,32 +1,31 @@
-var db = require('./db');
-var bcrypt = require('bcrypt-nodejs');
+var sqlite3 = require('sqlite3').verbose();
+const database = './players_and_masters.db';
 
-function searchPG(req, res, done) {
-    
-    //master che cerca un pg
-    
-    var nomepg = req.body.nomepg;
-    var nomeplayer = req.body.usernamePlayer;
-    var idSessione = session.user;
-    
-    db.each(
-        'SELECT * FROM party WHERE master = ?',
-        idSessione, 
-        
-        function (row) {
-            party = row.id;
-            db.all(
-                'SELECT * FROM user_characters JOIN user_parties WHERE party_id != ?',
-                party, 
-                
-                //db.all restituisce un array, prendendo le info user_id e char_id si possono recuperare i nomi da stampare
+exports.loadPG = function(req, res, next) {
 
-                function(){
-                    
-                            //stampa l'array
-                }
-                    
-            );
-        }
-    );
-};
+    //Caricamento pg per eventuale aggiunta a collezione lato player
+
+    let db = new sqlite3.Database(database);
+    var idUser = session.user;
+    var pgAcquistabiliarr = []
+    db.all(
+        'SELECT * FROM users_characters JOIN users JOIN characters WHERE characters.id= users_characters.char_id AND users.id=users_characters.user_id AND users_characters.user_id !=?',
+        idUser,
+        function(err, rows) {
+            rows.forEach(row => {
+                var idCharacter = row.char_id;
+                db.all(
+                    'SELECT * FROM characters WHERE characters.id= ',
+                    idCharacter,
+                    function(err, rows) {
+                        rows.forEach(row => {
+                            nomePg = rows.name;
+                            pgAcquistabili.push(nomePg)
+                        });
+
+                    });
+            });
+
+        });
+    db.close();
+}

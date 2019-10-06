@@ -1,6 +1,6 @@
-var db = require('./db');
 var bcrypt = require('bcrypt-nodejs');
-
+var sqlite3 = require('sqlite3').verbose();
+const database = './players_and_masters.db';
 /**definire database, apertura e chiusura
  * definire gli errori
  * definire le funzioni solo con  req,res,done
@@ -64,29 +64,35 @@ function addUser(req, res, done) {
 
 }
 
-function login(req, res, done) {
+exports.login = function(req, res) {
 
     let db = new sqlite3.Database(database);
 
     var email = req.body.email;
+    var password = req.body.password;
 
     db.get(
         'SELECT * FROM users WHERE email = ?',
         email,
-        function(row, password) {
+        function(err, row) {
             if (row != undefined) {
+                console.log('email esiste');
                 if (bcrypt.compareSync(password, row.password)) {
                     verified = true;
                     session = req.session;
                     session.user = row.id;
-                    res.redirect('/user');
+                    console.log(session.user);
+                    res.redirect('/user/player');
+
                 } else {
+                    console.log('password errata');
                     res.redirect('/');
-                    return done(null, false, { message: 'Password errata' });
+                    // return done(null, false, { message: 'Password errata' });
                 }
             } else {
+                console.log('email non registrata');
                 res.redirect('/');
-                return done(null, false, { message: 'Email non registrata' });
+                //return done(null, false, { message: 'Email non registrata' });
             }
         }
     );

@@ -31,9 +31,11 @@ img#logo {
     margin-bottom: 70px;
 }
 
+
+/*usato per i contenuti del player e del master dove sta il menu*/
+
 .contenuti {
     width: 100%;
-    background-color: red;
 }
 
 body {
@@ -322,14 +324,6 @@ div#risultato {
 }
 
 
-/*usato per i contenuti del player e del master dove sta il menu*/
-
-.contenuti {
-    border-radius: 10px;
-    width: 100%;
-}
-
-
 /*bottone per vedere la collezione dei personaggi*/
 
 .collezionePers {
@@ -377,8 +371,36 @@ div#risultato {
     background-color: darkred;
 }
 
-.creazioneParty {
+.aggiungiUser {
     background-color: rgb(202, 89, 52);
+}
+
+.creaParty {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    margin: 0 auto;
+    width: 60%;
+}
+
+.nomeParty {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: black;
+    margin-top: -10px;
+    width: 30%;
+    margin-right: 2%;
+}
+
+.bottone-agg-party {
+    border-radius: 10px;
+    background-color: darkorange;
+    color: white;
+    border-style: solid;
+    border-width: 0.5px;
+    height: 10%;
+    width: 25%;
 }
 
 .partyAttivi {
@@ -386,7 +408,7 @@ div#risultato {
     float: left;
 }
 
-.creaParty {
+.aggiungiUserRicerca {
     width: 100%;
     float: left;
 }

@@ -22,6 +22,15 @@
        <td>classe</td>
         <td><img src="https://i.ibb.co/k8K1k5K/trash.png" alt="trash" class="elimina" border="0"></td>
     </tr>
+    <tr>
+      <td>PERSONAGGIO1</td>
+      <td>CLASSE PERSONAGGIO</td>
+      <td>PARTY1 MASTER1, PARTY 2 MASTER2, PARRTY 3 MASTER 3, PARTY4 MASTER4, PARTY 5 MASTER 5, PARTY 6 MASTER6 </td>
+    </tr>
+    <tr>  <td>PERSONAGGIO2</td> 
+    <td>CLASSE PERSONAGGIO</td>  
+     <td>PARTY1 MASTER1, PARTY 2 MASTER2, PARRTY 3 MASTER 3, PARTY4 MASTER4, PARTY 5 MASTER 5, PARTY 6 MASTER6 </td>
+</tr>
   </tbody>
 </table>
 </div>
@@ -31,13 +40,15 @@
     <p >personaggi acquistabili </p>
 </div>
 <div id='nonPosseduti'>
+  
 <table style="background-color:white; width:100%"; name="personaggiAcquistabili" id="nonPossedutiTabella">
   <tbody>
+    {{#each pgAcquistabile }}
     <tr>
-      <td>nome personaggio</td>
-       <td>classe</td>
-        <td> <img src="https://i.ibb.co/QrfR2nD/piu-png-8.png" alt="piu-png-8" class="elimina"border="0"></td>
+      <td>{{this.name}} personaggio</td>
+        <td> <img src="https://i.ibb.co/QrfR2nD/piu-png-8.png" alt="piu-png-8" class="elimina" border="0"></td>
     </tr>
+    {{/each}}
   </tbody>
 </table>
 </div>

@@ -4,10 +4,20 @@ var sqlite3 = require('sqlite3').verbose();
 const database = './players_and_masters.db';
 /* GET users listing. */
 
-/*router.get('/player', function(req, res) {
+var checkAuthentication = function(req, res, next) {
+    if (req.session && req.session.user) {
+        next();
+    } else {
+        // user doesn't have access, return an HTTP 401 response
+        res.redirect("/");
+    }
+};
+
+
+router.get('/player', /*checkAuthentication,*/ function(req, res) {
     res.render('player/playerhome');
-});*/
-router.get('/player', function loadPG(req, res, done) {
+});
+/*router.get('/player', function loadPG(req, res, done) {
 
     //Caricamento pg per eventuale aggiunta a collezione lato player
 
@@ -54,11 +64,11 @@ router.get('/player', function loadPG(req, res, done) {
 
     );
     res.render('player/playerhome');
-});
+});*/
 
 
 
-router.get('/master', function(req, res) {
+router.get('/master', /* checkAuthentication,*/ function(req, res) {
     res.render('master/masterhome');
 });
 module.exports = router;

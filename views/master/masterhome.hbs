@@ -5,7 +5,7 @@
     <div class="menumaster"> 
  <ul>
     <li class="menu-item collezioneParty">Party attivi</li>
-    <li class="menu-item creazioneParty">Crea party</li>
+    <li class="menu-item aggiungiUser">Crea party</li>
     <li class="menu-item schedePers">Schede Personaggi</li>
 
   </ul>
@@ -13,6 +13,8 @@
 <div class="contenuti">
 <div class="partyAttivi" > 
 <form id="griglia-personaggi" class="clearfix">
+  <div class="creaParty">
+  <p>Nome party:  <input class="nomeParty" name="nomeParty"><button type="submit" class="bottone-agg-party">Aggiungi party</button> </p></div>
   <div id="intestazioneForm">
     <p >party attivi</p>
 </div>
@@ -26,7 +28,7 @@
   </tbody>
 </table>
 </div>
-<div class="creaParty " >
+<div class="aggiungiUserRicerca " >
   <form id="ricerca" class="clearfix">
     <div id="intestazioneForm" style="font-size:25px" >Ricerca players</div>
    <div class="filtri all_orizz">
@@ -43,7 +45,7 @@
   <!-- CHECKBOX -->
   <!--<p style="font-style: italic; font-size:18px; ">Classe</p>-->
 
-  <button class="dropdown-btn active classi classe-btn " type="button">Classe
+ <!-- <button class="dropdown-btn active classi classe-btn " type="button">Classe
     <i class="fa fa-caret-down"></i>
   </button>
  
@@ -81,7 +83,7 @@
             <input type="checkbox" name="razza" >Felinide <br>
              <input type="checkbox" name="razza" >Centauro 
              <input type="checkbox" name="razza" >Aasimar <br>
-</div></div> 
+</div></div> *
   <div id="cerca"> <button type="submit" name="cerca" class="bottone-conferma" >Cerca</button></div>
  
 </div>
@@ -293,10 +295,10 @@
 
 <script>
   $ (document) .ready (function () {
-       $(".creaParty").hide();
+       $(".aggiungiUserRicerca").hide();
        $(".cards").hide();
-$(".creazioneParty").click(function(e){ 
-  $(".creaParty").show();
+$(".aggiungiUser").click(function(e){ 
+  $(".aggiungiUserRicerca").show();
     $(".partyAttivi").hide();
     $(".cards").hide();
    e.preventDefault();
@@ -305,7 +307,7 @@ $(".creazioneParty").click(function(e){
     });
 $ (document) .ready (function () {
 $(".collezioneParty").click(function(e){ 
-  $(".creaParty").hide();
+  $(".aggiungiUserRicerca").hide();
   $(".cards").hide();
     $(".partyAttivi").show();
    e.preventDefault();
@@ -314,7 +316,7 @@ $(".collezioneParty").click(function(e){
     });
     $ (document) .ready (function () {
 $(".schedePers").click(function(e){ 
-  $(".creaParty").hide();
+  $(".aggiungiUserRicerca").hide();
       $(".cards").show();
     $(".partyAttivi").hide();
    e.preventDefault();
@@ -325,7 +327,7 @@ $(".schedePers").click(function(e){
   var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;
 
-for (i = 0; i < dropdown.length; i++) {
+/*for (i = 0; i < dropdown.length; i++) {
   dropdown[i].addEventListener("click", function() {
     this.classList.toggle("active");
     var dropdownContent = this.nextElementSibling;
@@ -335,6 +337,6 @@ for (i = 0; i < dropdown.length; i++) {
       dropdownContent.style.display = "block";
     }
   });
-}
+}*/
 
 </script>

@@ -5,7 +5,7 @@ const database = './players_and_masters.db';
 var bcrypt = require('bcrypt-nodejs');
 var errors = require('express-validator-errors');
 
-
+const userController = require('../controller/userController');
 /*var userController = require('./controller/userController');*/
 
 
@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
     res.render('user/login', { title: 'P&M' });
 });
 
-router.post('/', function(req, res, done) {
+/*router.post('/', function(req, res, done) {
 
     let db = new sqlite3.Database(database);
 
@@ -34,7 +34,7 @@ router.post('/', function(req, res, done) {
                     verified = true;
                     session = req.session;
                     session.user = row.id;
-                    console.log('password corretta');
+                    console.log(session.user);
                     res.redirect('/user/player');
 
                 } else {
@@ -52,7 +52,9 @@ router.post('/', function(req, res, done) {
 
     db.close();
 
-});
+});*/
+
+router.post('/', userController.login);
 
 router.get('/registration', function(req, res, next) {
 
@@ -145,5 +147,11 @@ router.get('/registration', function(req, res, next) {
     });
 });
 
+router.get('/logout', function(req, res) {
+    req.session.user = undefined;
+    console.log(req.session.user);
+    res.redirect('/');
 
+
+});
 module.exports = router;
