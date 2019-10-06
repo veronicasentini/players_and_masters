@@ -58,100 +58,12 @@ router.post('/', userController.login);
 
 router.get('/registration', function(req, res, next) {
 
-    res.render('user/registration');
-
-
-    router.post('/registration', function addUser(req, res, done) {
-
-        let db = new sqlite3.Database(database);
-
-        var username = req.body.username;
-        var email = req.body.email;
-        var password = req.body.password;
-        var password_confirm = req.body.password_confirm;
-
-        console.log(username);
-        console.log(email);
-        console.log(password);
-        console.log(password_confirm);
-
-
-        db.get(
-            'SELECT * FROM users WHERE name = ?',
-            username,
-            function(err, row) {
-                console.log('entra nella funzione');
-                if (row != undefined) {
-                    console.log('nome utente già in uso');
-                    res.redirect('/registration');
-
-                    //return done(null, false, { message: 'Nome utente già in uso' });
-
-                } else if (username == '') {
-                    console.log('campo username vuoto');
-                    res.redirect('/registration');
-
-                    //return done(null, false, { message: 'Campo nome utente vuoto' });
-
-                } else if (email == '') {
-                    console.log('campo email vuoto');
-                    res.redirect('/registration');
-
-                    //return done(null, false, { message: 'Campo email vuoto' });
-
-                } else if (password.length < 6) {
-                    console.log('password troppo corta');
-                    res.redirect('/registration');
-
-                    //return done(null, false, { message: 'Password troppo breve' });
-
-                } else {
-
-                    db.get(
-                        'SELECT * FROM users WHERE email = ?',
-                        email,
-                        function(err, row) {
-                            console.log('entra nella funzione');
-
-                            if (row != undefined) {
-                                console.log('Email già in uso');
-                                res.redirect('/registration');
-
-                                //return done(null, false, { message: 'Email già in uso' });
-
-                            } else if (password_confirm != password) {
-                                console.log('le password non corrispondono');
-                                res.redirect('/registration');
-
-                                //return done(null, false, { message: 'Le password inserite non coincidono' })
-
-                            } else {
-
-                                var hash = bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
-
-                                db.run('INSERT INTO users(name, email, password) VALUES (?, ?, ?);', username, email, hash);
-                                //return done(null, false, { message: true });
-                                res.redirect('/');
-                                //console.log('dovrebbe inserirlo');
-
-                            }
-
-                        }
-                    )
-                }
-            }
-        )
-
-        db.close();
-
-    });
+    res.render('user/registration')
 });
 
-router.get('/logout', function(req, res) {
-    req.session.user = undefined;
-    console.log(req.session.user);
-    res.redirect('/');
 
+router.post('/registration', userController.addUser);
 
-});
+router.get('/logout', userController.logout);
+
 module.exports = router;

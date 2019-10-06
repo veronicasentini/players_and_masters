@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var sqlite3 = require('sqlite3').verbose();
 const database = './players_and_masters.db';
+const userController = require('../controller/userController');
 /* GET users listing. */
 
 var checkAuthentication = function(req, res, next) {
@@ -14,9 +15,7 @@ var checkAuthentication = function(req, res, next) {
 };
 
 
-router.get('/player', /*checkAuthentication,*/ function(req, res) {
-    res.render('player/playerhome');
-});
+router.get('/player', checkAuthentication, userController.loadPG); /*checkAuthentication,*/
 /*router.get('/player', function loadPG(req, res, done) {
 
     //Caricamento pg per eventuale aggiunta a collezione lato player

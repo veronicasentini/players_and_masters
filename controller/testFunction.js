@@ -19,10 +19,11 @@ exports.loadPG = function(req, res, next) {
                     idCharacter,
                     function(err, rows) {
                         rows.forEach(row => {
-                            nomePg = rows.name;
-                            pgAcquistabili.push(nomePg)
+                            pgAcquistabili.push(row);
                         });
-
+                        res.render('player/playerhome', {
+                            pgAcquistabile: pgAcquistabiliarr
+                        });
                     });
             });
 

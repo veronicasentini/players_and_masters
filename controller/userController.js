@@ -1,13 +1,14 @@
 var bcrypt = require('bcrypt-nodejs');
 var sqlite3 = require('sqlite3').verbose();
 const database = './players_and_masters.db';
+
 /**definire database, apertura e chiusura
  * definire gli errori
  * definire le funzioni solo con  req,res,done
  * 
  */
 
-function addUser(req, res, done) {
+exports.addUser = function(req, res, done) {
 
     let db = new sqlite3.Database(database);
 
@@ -101,7 +102,41 @@ exports.login = function(req, res) {
 
 }
 
-function logout(req, res) {
+exports.loadPG = function(req, res, next) {
+
+    //Caricamento pg per eventuale aggiunta a collezione lato player
+
+    let db = new sqlite3.Database(database);
+    var session = req.session;
+    var idUser = session.user;
+    console.log(idUser);
+    var pgAcquistabiliarr = []
+    db.all(
+        'SELECT * FROM users_characters JOIN users JOIN characters WHERE characters.id= users_characters.char_id AND users.id=users_characters.user_id AND users_characters.user_id !=?',
+        idUser,
+        function(err, rows) {
+            console.log(idUser);
+            rows.forEach(row => {
+                var idCharacter = row.char_id;
+                console.log(idCharacter);
+                db.all(
+                    'SELECT * FROM characters WHERE characters.id=? ',
+                    idCharacter,
+                    function(err, rows) {
+                        rows.forEach(row => {
+                            pgAcquistabili.push(row);
+                        });
+                        res.render('player/playerhome', {
+                            pgAcquistabile: pgAcquistabiliarr
+                        });
+                    });
+            });
+
+        });
+    db.close();
+}
+
+exports.logout = function(req, res) {
 
     req.session.user = undefined;
     res.redirect('/');
