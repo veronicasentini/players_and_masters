@@ -20,7 +20,8 @@ router.get('/player', checkAuthentication, userController.loadPG);
 router.post('/player/aggiungiPg', playerController.addPG);
 
 router.get('/master/aggiungiParty', masterController.addParty);
-router.get('/master', /* checkAuthentication,*/ function(req, res, next) {
+
+router.get('/master', checkAuthentication, function(req, res, next) {
     res.render('master/masterhome');
 });
 

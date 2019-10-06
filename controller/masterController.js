@@ -4,18 +4,23 @@ const database = './players_and_masters.db';
 
 
 exports.addParty = function(req, res) {
-        var session = req.session;
-        var idMaster = session.user;
-        var nomeParty = req.body.nomeParty;
 
-        db.all(
+        var idMaster = req.session.user;
+        var nomeParty = req.body.nomeParty;
+        console.log(idMaster);
+        console.log(nomeParty);
+        let db = new sqlite3.Database(database);
+
+        db.get(
             'SELECT * FROM party WHERE name=? AND master=?',
             nomeParty,
             idMaster,
-            function(err, rows) {
-                if (rows = !undefined) {
+            function(err, row) {
+                console.log(idMaster);
+                console.log(nomeParty);
+                if (row = !undefined) {
                     console.log('party già esistente');
-                    res.redirect('/users/master');
+                    res.redirect('/user/master');
                 } else {
 
                     db.run('INSERT INTO party(name, master) VALUES (?,?) ',
@@ -25,7 +30,8 @@ exports.addParty = function(req, res) {
 
                 }
             }
-        )
+        );
+        db.close();
     }
     /*-----------------------------------------------------*/
 exports.searchPG = function(req, res, done) {

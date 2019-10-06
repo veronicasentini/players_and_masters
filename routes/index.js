@@ -7,6 +7,7 @@ var errors = require('express-validator-errors');
 
 const userController = require('../controller/userController');
 /*var userController = require('./controller/userController');*/
+const masterController = require('../controller/masterController');
 
 
 
