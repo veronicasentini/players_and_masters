@@ -337,6 +337,16 @@ div#risultato {
     background-color: rgb(202, 89, 52);
 }
 
+.bottone-agg-pg {
+    border-radius: 10px;
+    background-color: darkorange;
+    color: white;
+    border-style: solid;
+    border-width: 0.5px;
+    height: 10%;
+    width: 25%;
+}
+
 .schedePers {
     background-color: coral;
 }
@@ -355,6 +365,10 @@ div#risultato {
 .personaggiAcq {
     width: 100%;
     float: left;
+}
+
+.personaggioAcquistabile {
+    border-top: solid 1px black;
 }
 
 
@@ -532,6 +546,9 @@ STYLE PER I MOBILE
     .filtri {
         display: none;
     }
+    .bottone-agg-pg {
+        width: 40%;
+    }
     /* cards personaggi*/
     div.card {
         width: 80%;
@@ -539,5 +556,15 @@ STYLE PER I MOBILE
     }
     div#intestazioneForm {
         font-size: 25px;
+    }
+    .nomeParty {
+        width: 40%
+    }
+    .bottone-agg-party {
+        width: 25%;
+    }
+    .creaParty {
+        font-size: 15px;
+        width: 90%;
     }
 }

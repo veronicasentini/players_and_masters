@@ -1,7 +1,34 @@
-var db = require('./db');
 var bcrypt = require('bcrypt-nodejs');
+var sqlite3 = require('sqlite3').verbose();
+const database = './players_and_masters.db';
 
-export function searchPG(req, res, done) {
+
+exports.addParty = function(req, res) {
+        var session = req.session;
+        var idMaster = session.user;
+        var nomeParty = req.body.nomeParty;
+
+        db.all(
+            'SELECT * FROM party WHERE name=? AND master=?',
+            nomeParty,
+            idMaster,
+            function(err, rows) {
+                if (rows = !undefined) {
+                    console.log('party già esistente');
+                    res.redirect('/users/master');
+                } else {
+
+                    db.run('INSERT INTO party(name, master) VALUES (?,?) ',
+                        nomeParty,
+                        idMaster);
+                    res.redirect('/user/master');
+
+                }
+            }
+        )
+    }
+    /*-----------------------------------------------------*/
+exports.searchPG = function(req, res, done) {
 
     //master che cerca un pg
 
@@ -58,7 +85,7 @@ export function searchPG(req, res, done) {
 
 };
 
-export function addPGParty(req, pgriga, playerriga, res, done) {
+exports.addPGParty = function(req, pgriga, playerriga, res, done) {
 
     //aggiunta di un pg ad un party
 
@@ -131,54 +158,9 @@ export function addPGParty(req, pgriga, playerriga, res, done) {
 }
 
 
-export function loadPG(req, res, done) {
 
-    //Caricamento pg per eventuale aggiunta a collezione lato player
 
-    let db = new sqlite3.Database(database);
-
-    db.all(
-        'SELECT * FROM characters',
-
-        function(rows) {
-            num = rows.lenght;
-            var risultati = new Array[num];
-            for (var i = 0; i < num; i++) {
-                risultati[i] = [];
-                for (var j = 0; j < 3; j++) {
-                    risultati[i][j] = undefined;
-                }
-            }
-
-            for (i = 0; i < num; i++) {
-
-                risultati[i][0] = rows[i].name;
-                risultati[i][1] = rows[i].class;
-                risultati[i][2] = rows[i].id;
-
-            }
-
-            var table = "<table>"
-
-            for (i = 0; i < num; i++) {
-                table += "<tr>";
-                table += "<tc>" + risultati[i][0] + "</tc>";
-                table += "<tc>" + risultati[i][1] + "</tc>";
-                table += "<button onclick = addPG(req, risultati[i][2], res, done)>" + "+" + "</button>";
-                table += "</tr>";
-            }
-
-            table += "</table>";
-
-            document.getElementById("nomedelluogoincuiposizionarelatabella").innerHTML = table;
-
-        }
-
-    );
-
-};
-
-export function addPG(req, idpg, res, done) {
+exports.addPG = function(req, idpg, res, done) {
 
     //aggiunta di un pg alla collezione player 
 

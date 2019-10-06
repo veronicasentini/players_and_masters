@@ -18,90 +18,122 @@ exports.addUser = function(req, res, done) {
     var password_confirm = req.body.password_confirm;
 
 
-    db.each(
+    db.get(
         'SELECT * FROM users WHERE name = ?',
         username,
         function(err, row) {
-
+            console.log('entra nella funzione');
             if (row != undefined) {
+                console.log('nome utente già in uso');
+                res.redirect('/registration');
 
-                return done(null, false, { message: 'Nome utente già in uso' });
+                //return done(null, false, { message: 'Nome utente già in uso' });
+
+
+            } else if (username == '') {
+                console.log('campo username vuoto');
+                res.redirect('/registration');
+
+
+                //return done(null, false, { message: 'Campo nome utente vuoto' });
+
+            } else if (email == '') {
+                console.log('campo email vuoto');
+                res.redirect('/registration');
+
+
+                //return done(null, false, { message: 'Campo email vuoto' });
+
+            } else if (password.length < 6) {
+                console.log('password troppo corta');
+                res.redirect('/registration');
+
+
+                //return done(null, false, { message: 'Password troppo breve' });
+
 
             } else {
 
-                db.each(
+                db.get(
                     'SELECT * FROM users WHERE email = ?',
                     email,
                     function(err, row) {
+                        console.log('entra nella funzione');
 
                         if (row != undefined) {
+                            console.log('Email già in uso');
+                            res.redirect('/registration');
 
-                            return done(null, false, { message: 'Email già in uso' });
+                            //return done(null, false, { message: 'Email già in uso' });
+
+                        } else if (password_confirm != password) {
+                            console.log('le password non corrispondono');
+                            res.redirect('/registration');
+
+                            //return done(null, false, { message: 'Le password inserite non coincidono' })
 
                         } else {
 
-                            if (password_confirm != password) {
+                            var hash = bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
 
-                                return done(null, false, { message: 'Le password inserite non coincidono' })
+                            db.run('INSERT INTO users(name, email, password) VALUES (?, ?, ?);', username, email, hash);
 
-                            } else {
+                            //return done(null, false, { message: true });
+                            res.redirect('/');
+                            //console.log('dovrebbe inserirlo');
 
-                                var hash = bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
-
-                                db.run('INSERT INTO users(name, email, password) VALUES (?, ?, ?);', username, email, hash);
-
-                                res.redirect('/');
-
-                                return done(null, false, { message: true });
-                            }
                         }
+
                     }
+
                 )
             }
         }
+
     )
+
 
     db.close();
 
-}
+};
 
 exports.login = function(req, res) {
 
-    let db = new sqlite3.Database(database);
+        let db = new sqlite3.Database(database);
 
-    var email = req.body.email;
-    var password = req.body.password;
+        var email = req.body.email;
+        var password = req.body.password;
 
-    db.get(
-        'SELECT * FROM users WHERE email = ?',
-        email,
-        function(err, row) {
-            if (row != undefined) {
-                console.log('email esiste');
-                if (bcrypt.compareSync(password, row.password)) {
-                    verified = true;
-                    session = req.session;
-                    session.user = row.id;
-                    console.log(session.user);
-                    res.redirect('/user/player');
+        db.get(
+            'SELECT * FROM users WHERE email = ?',
+            email,
+            function(err, row) {
+                if (row != undefined) {
+                    console.log('email esiste');
+                    if (bcrypt.compareSync(password, row.password)) {
+                        verified = true;
+                        session = req.session;
+                        session.user = row.id;
+                        console.log(session.user);
+                        res.redirect('/user/player');
 
+                    } else {
+                        console.log('password errata');
+                        res.redirect('/');
+                        // return done(null, false, { message: 'Password errata' });
+                    }
                 } else {
-                    console.log('password errata');
+                    console.log('email non registrata');
                     res.redirect('/');
-                    // return done(null, false, { message: 'Password errata' });
+                    //return done(null, false, { message: 'Email non registrata' });
                 }
-            } else {
-                console.log('email non registrata');
-                res.redirect('/');
-                //return done(null, false, { message: 'Email non registrata' });
             }
-        }
-    );
+        );
 
-    db.close();
+        db.close();
 
-}
-
+    }
+    //metodo che mostra i pg acquistabili da quel'utente
 exports.loadPG = function(req, res, next) {
 
     //Caricamento pg per eventuale aggiunta a collezione lato player
@@ -110,29 +142,16 @@ exports.loadPG = function(req, res, next) {
     var session = req.session;
     var idUser = session.user;
     console.log(idUser);
-    var pgAcquistabiliarr = []
-    db.all(
-        'SELECT * FROM users_characters JOIN users JOIN characters WHERE characters.id= users_characters.char_id AND users.id=users_characters.user_id AND users_characters.user_id !=?',
+    // var pgAcquistabiliarr = []
+    db.all('SELECT * FROM characters WHERE id NOT IN (SELECT char_id FROM users_characters WHERE user_id = ?)',
         idUser,
         function(err, rows) {
-            console.log(idUser);
-            rows.forEach(row => {
-                var idCharacter = row.char_id;
-                console.log(idCharacter);
-                db.all(
-                    'SELECT * FROM characters WHERE characters.id=? ',
-                    idCharacter,
-                    function(err, rows) {
-                        rows.forEach(row => {
-                            pgAcquistabili.push(row);
-                        });
-                        res.render('player/playerhome', {
-                            pgAcquistabile: pgAcquistabiliarr
-                        });
-                    });
+            console.log(rows);
+            res.render('player/playerhome', {
+                pgAcquistabile: rows
             });
-
         });
+
     db.close();
 }
 

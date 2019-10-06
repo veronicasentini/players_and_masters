@@ -1,7 +1,7 @@
 {{>headerUser}}
 <p class="area-player-master">Benvenuto nell'area Master</p>
 
-<form action="" class="playerhome clearfix">
+<form  class="playerhome clearfix">
     <div class="menumaster"> 
  <ul>
     <li class="menu-item collezioneParty">Party attivi</li>
@@ -13,17 +13,18 @@
 <div class="contenuti">
 <div class="partyAttivi" > 
 <form id="griglia-personaggi" class="clearfix">
-  <div class="creaParty">
-  <p>Nome party:  <input class="nomeParty" name="nomeParty"><button type="submit" class="bottone-agg-party">Aggiungi party</button> </p></div>
-  <div id="intestazioneForm">
+  <form ><div class="creaParty" >
+  <p >Nome party:  <input class="nomeParty" name="nomeParty"><a href="/user/master/aggiungiParty"><button type="submit" class="bottone-agg-party" >Aggiungi party</button></a></p></div>
+ </form> 
+ <div id="intestazioneForm">
     <p >party attivi</p>
 </div>
-<table style="background-color: white; width:100%">
+<table style="background-color:rgba(240, 248, 255, 0.5); width:100%">
   <tbody>
     <tr>
       <td>nome party</td>
        <td>numero personaggi</td>
-        <td><img src="https://i.ibb.co/k8K1k5K/trash.png" alt="trash" class="elimina" border="0"></td>
+        <td></td>
     </tr>
   </tbody>
 </table>
@@ -36,16 +37,16 @@
        <p style="font-weight: bold; font-size:20px">FILTRI</p>
 
   <!-- CASELLE DI TESTO -->
+ <p style="font-style: italic; font-size:18px; ">Nome Party<br>
+  <input type="text" class="mail-password" name="nameParty"></p>
  <p style="font-style: italic; font-size:18px; ">Nome Utente<br>
-  <input type="text" class="mail-password" name="name"></p>
- <p style="font-style: italic; font-size:18px; ">Email<br>
-  <input type="text" class="mail-password" name="email"></p>
+  <input type="text" class="mail-password" name="username"></p>
   <p style="font-style: italic; font-size:18px; ">Personaggio<br>
   <input type="text" class="mail-password" name="personaggio"></p>
   <!-- CHECKBOX -->
   <!--<p style="font-style: italic; font-size:18px; ">Classe</p>-->
 
- <!-- <button class="dropdown-btn active classi classe-btn " type="button">Classe
+ <!--<button class="dropdown-btn active classi classe-btn " type="button">Classe
     <i class="fa fa-caret-down"></i>
   </button>
  
@@ -83,7 +84,8 @@
             <input type="checkbox" name="razza" >Felinide <br>
              <input type="checkbox" name="razza" >Centauro 
              <input type="checkbox" name="razza" >Aasimar <br>
-</div></div> *
+</div>-->
+</div> 
   <div id="cerca"> <button type="submit" name="cerca" class="bottone-conferma" >Cerca</button></div>
  
 </div>
@@ -105,7 +107,7 @@
 </div>
 <section class="cards clearfix" >
   <div id="intestazioneForm">
-    <p > Schede Personaggi</p>
+    <p> Schede Personaggi</p>
 </div>
   <!--Alhandra-->
   <div class="card">

@@ -19,7 +19,6 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-const sqllite3 = require('./controller/db');
 
 
 app.engine('.hbs', expressHbs({ defaultLayout: 'layout', extname: '.hbs' }));

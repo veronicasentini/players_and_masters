@@ -15,12 +15,11 @@
   <div id="intestazioneForm">
     <p >personaggi posseduti</p>
 </div>
-<table style="background-color: white; width:100%" id="posseduti">
+<table style="background-color: rgba(240, 248, 255, 0.5); width:100%" id="posseduti">
   <tbody>
     <tr>
       <td>nome personaggio</td>
        <td>classe</td>
-        <td><img src="https://i.ibb.co/k8K1k5K/trash.png" alt="trash" class="elimina" border="0"></td>
     </tr>
     <tr>
       <td>PERSONAGGIO1</td>
@@ -41,12 +40,12 @@
 </div>
 <div id='nonPosseduti'>
   
-<table style="background-color:white; width:100%"; name="personaggiAcquistabili" id="nonPossedutiTabella">
+<table style="background-color:rgba(240, 248, 255, 0.5); width:100%"; name="personaggiAcquistabili" id="nonPossedutiTabella">
   <tbody>
     {{#each pgAcquistabile }}
-    <tr>
-      <td>{{this.name}} personaggio</td>
-        <td> <img src="https://i.ibb.co/QrfR2nD/piu-png-8.png" alt="piu-png-8" class="elimina" border="0"></td>
+    <tr class="personaggioAcquistabile" method="POST" action="/user/player/">
+      <td>{{this.name}} </td>
+        <td> <button class="bottone-agg-pg">aggiungi</button></td>
     </tr>
     {{/each}}
   </tbody>
