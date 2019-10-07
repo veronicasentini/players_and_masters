@@ -54,3 +54,21 @@ exports.addPG = function(req, res) {
     //res ricarica la pagina eliminando il pg appena aggiunto
 
 }
+
+exports.loadPGPoss = function(req, res) {
+    let db = new sqlite3.Database(database);
+    var user_id = req.session.user;
+
+    db.all('SELECT * FROM characters JOIN users_characters ON characters.id=users_characters.char_id WHERE users_characters.user_id=?',
+        user_id,
+        function(err, rows) {
+            console.log(rows);
+            console.log('user_id in loadPGposs' + user_id);
+            res.render('/player', {
+                pgPosseduto: rows
+            });
+
+        });
+
+    db.close();
+}

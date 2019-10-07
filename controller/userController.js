@@ -1,7 +1,7 @@
 var bcrypt = require('bcrypt-nodejs');
 var sqlite3 = require('sqlite3').verbose();
 const database = './players_and_masters.db';
-
+const playerController = require('./playerController');
 /**definire database, apertura e chiusura
  * definire gli errori
  * definire le funzioni solo con  req,res,done
@@ -142,16 +142,33 @@ exports.loadPG = function(req, res, next) {
     var session = req.session;
     var idUser = session.user;
     console.log(idUser);
+    var pgAcquistabiliarr = [];
+    var pgPossedutiarr = [];
     // var pgAcquistabiliarr = []
     db.all('SELECT * FROM characters WHERE id NOT IN (SELECT char_id FROM users_characters WHERE user_id = ?)',
         idUser,
         function(err, rows) {
             console.log(rows);
-            res.render('player/playerhome', {
-                pgAcquistabile: rows
-            });
-        });
+            pgAcquistabiliarr = rows;
+            console.log(pgAcquistabiliarr);
+            db.all('SELECT * FROM characters JOIN users_characters ON characters.id=users_characters.char_id WHERE users_characters.user_id=?',
+                idUser,
+                function(err, rows) {
+                    console.log(rows);
+                    pgPossedutiarr = rows;
+                    console.log(pgPossedutiarr);
+                    res.render('player/playerhome', {
+                        pgAcquistabile: pgAcquistabiliarr,
+                        pgPosseduto: pgPossedutiarr
+                    })
 
+                    /* res.render('player/playerhome', playerController.loadPGPoss, {
+                         pgAcquistabile: rows
+                     });*/
+                });
+
+
+        });
     db.close();
 }
 

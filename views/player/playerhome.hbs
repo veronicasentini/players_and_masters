@@ -17,19 +17,16 @@
 </div>
 <table style="background-color: rgba(240, 248, 255, 0.5); width:100%" id="posseduti">
   <tbody>
-    <tr>
+    <tr style="background-color:red;">
       <td>nome personaggio</td>
        <td>classe</td>
     </tr>
-    <tr>
-      <td>PERSONAGGIO1</td>
-      <td>CLASSE PERSONAGGIO</td>
-      <td>PARTY1 MASTER1, PARTY 2 MASTER2, PARRTY 3 MASTER 3, PARTY4 MASTER4, PARTY 5 MASTER 5, PARTY 6 MASTER6 </td>
+    {{#each pgPosseduto}}
+    <tr class="personaggioAcquistabile">
+      <td>{{this.name}}</td>
+      <td>{{this.class}}</td>
     </tr>
-    <tr>  <td>PERSONAGGIO2</td> 
-    <td>CLASSE PERSONAGGIO</td>  
-     <td>PARTY1 MASTER1, PARTY 2 MASTER2, PARRTY 3 MASTER 3, PARTY4 MASTER4, PARTY 5 MASTER 5, PARTY 6 MASTER6 </td>
-</tr>
+    {{/each}}
   </tbody>
 </table>
 </div></div>
