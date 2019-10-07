@@ -21,9 +21,7 @@ router.post('/player/aggiungiPg', playerController.addPG);
 
 router.post('/master/aggiungiParty', masterController.addParty);
 
-router.get('/master', checkAuthentication, function(req, res, next) {
-    res.render('master/masterhome');
-});
+router.get('/master', checkAuthentication, masterController.loadParty);
 
 
 module.exports = router;

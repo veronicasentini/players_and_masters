@@ -407,6 +407,10 @@ div#risultato {
     margin-right: 2%;
 }
 
+.partyAttivo {
+    border-top: solid 1px black;
+}
+
 .bottone-agg-party {
     border-radius: 10px;
     background-color: darkorange;

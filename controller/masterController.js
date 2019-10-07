@@ -6,7 +6,7 @@ const database = './players_and_masters.db';
 function addParty(req, res) {
 
     var idMaster = req.session.user;
-    var nomePartyMaster = req.body.nomeParty;
+    var nomePartyMaster = req.body.nomePartyMaster;
     console.log(idMaster);
     console.log(nomePartyMaster);
     let db = new sqlite3.Database(database);
@@ -17,14 +17,15 @@ function addParty(req, res) {
         idMaster,
         function(err, row) {
             console.log(idMaster);
-            console.log(nomeParty);
-            if (row = !undefined) {
+            console.log(nomePartyMaster);
+            console.log('row' + row);
+            if (row != undefined) {
                 console.log('party già esistente');
                 res.redirect('/user/master');
             } else {
                 console.log('nuovo party creato');
                 db.run('INSERT INTO party(name, master) VALUES (?,?) ',
-                    nomeParty,
+                    nomePartyMaster,
                     idMaster);
                 res.redirect('/user/master');
 
@@ -33,7 +34,23 @@ function addParty(req, res) {
     );
     db.close();
 }
-/*-----------------------------------------------------*/
+exports.loadParty = function(req, res, done) {
+        var masterId = req.session.user;
+
+        let db = new sqlite3.Database(database);
+        db.all('SELECT * FROM party WHERE master=?',
+            masterId,
+            function(err, rows) {
+                console.log(rows);
+                res.render('master/masterhome', {
+                    partyAttivi: rows
+                });
+
+            });
+
+        db.close();
+    }
+    /*-----------------------------------------------------*/
 exports.searchPG = function(req, res, done) {
 
     //master che cerca un pg

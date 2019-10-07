@@ -1,7 +1,7 @@
 {{>headerUser}}
 <p class="area-player-master">Benvenuto nell'area Master</p>
 
-<form  class="playerhome clearfix">
+<div  class="playerhome clearfix">
     <div class="menumaster"> 
  <ul>
     <li class="menu-item collezioneParty">Party attivi</li>
@@ -11,30 +11,31 @@
   </ul>
 </div>
 <div class="contenuti">
-<div class="partyAttivi" > 
+<form  method="POST"  action="/user/master/aggiungiParty"class="partyAttivi" > 
 
-  <form method="POST" action="user/master/aggiungiParty"><div class="creaParty" >
+  <div class="creaParty" >
   <p>Nome party: <input class="nomeParty" name="nomePartyMaster"> 
   <!--<a href="/user/master/aggiungiParty" style="background-color: darkorange; border-color:black; border-weight:2px;">aggiungi Party</a>-->
   </p> <button type="submit" class="bottone-agg-party">aggiungi party</button></div>
- </form>
-  <form id="griglia-personaggi" class="clearfix">
+ 
+  <div id="griglia-personaggi" class="clearfix">
  <div id="intestazioneForm">
     <p >party attivi</p>
 </div>
 <table style="background-color:rgba(240, 248, 255, 0.5); width:100%">
   <tbody>
-    <tr>
+    <tr style="background-color: darkorange">
       <td>nome party</td>
-       <td>numero personaggi</td>
-        <td></td>
     </tr>
+{{#each partyAttivi}}
+<tr class="partyAttivo"><td>{{this.name}}</td></tr>
+{{/each}}
   </tbody>
 </table>
-</form>
 </div>
+</form>
 <div class="aggiungiUserRicerca " >
-  <form id="ricerca" class="clearfix">
+  <div id="ricerca" class="clearfix">
     <div id="intestazioneForm" style="font-size:25px" >Ricerca players</div>
    <div class="filtri all_orizz">
       <div style="margin-left: 5px;">
@@ -294,7 +295,7 @@
 </div>
 </section>
 </div>
-</form>
+</div>
 
 <!-- inclusione jquery-->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -320,6 +321,7 @@ $(".collezioneParty").click(function(e){
 },
 );
     });
+
     $ (document) .ready (function () {
 $(".schedePers").click(function(e){ 
   $(".aggiungiUserRicerca").hide();
@@ -330,19 +332,5 @@ $(".schedePers").click(function(e){
 );
     });
 
-  var dropdown = document.getElementsByClassName("dropdown-btn");
-var i;
-
-/*for (i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var dropdownContent = this.nextElementSibling;
-    if (dropdownContent.style.display === "block") {
-      dropdownContent.style.display = "none";
-    } else {
-      dropdownContent.style.display = "block";
-    }
-  });
-}*/
 
 </script>
