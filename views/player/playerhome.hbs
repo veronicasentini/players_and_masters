@@ -1,6 +1,6 @@
 {{>headerUser}}
 <h2 class="area-player-master">Benvenuto nell'area Player</h2>
-<form action="" class="playerhome clearfix">
+<div action="" class="playerhome clearfix">
 <div class="menuplayer">
   <ul >
     <li class="menu-item collezionePers">Personaggi Posseduti</li>
@@ -11,7 +11,7 @@
 </div>
 <div class="contenuti">
 <div class="personaggiPoss" > 
-<form id="griglia-personaggi" class="clearfix">
+<div id="griglia-personaggi" class="clearfix">
   <div id="intestazioneForm">
     <p >personaggi posseduti</p>
 </div>
@@ -32,18 +32,23 @@
 </tr>
   </tbody>
 </table>
-</div>
-<div class="personaggiAcq " >
-  <form id="griglia-personaggi" class="clearfix">
+</div></div>
+<form class="personaggiAcq "  method="POST" action="/user/player/aggiungiPg">
+ <div class="creaParty" >
+  <p>Personaggio <input class="nomeParty" name="nomePersonaggio"> 
+  <!--<a href="/user/master/aggiungiParty" style="background-color: darkorange; border-color:black; border-weight:2px;">aggiungi Party</a>-->
+  <button type="submit" class="bottone-agg-party">aggiungi Pg</button></p> </div>
+  <div id="griglia-personaggi" class="clearfix">
 <div id="intestazioneForm">
     <p >personaggi acquistabili </p>
 </div>
+
 <div id='nonPosseduti'>
   
 <table style="background-color:rgba(240, 248, 255, 0.5); width:100%"; name="personaggiAcquistabili" id="nonPossedutiTabella">
   <tbody>
     {{#each pgAcquistabile }}
-    <tr class="personaggioAcquistabile" method="POST" action="/user/player/">
+    <tr class="personaggioAcquistabile">
       <td>{{this.name}} </td>
        
     </tr>
@@ -51,8 +56,8 @@
   </tbody>
 </table>
 </div>
-</form>
 </div>
+</form>
 <section class="cards clearfix" >
   <div id="intestazioneForm">
     <p > Schede Personaggi</p>
@@ -238,7 +243,7 @@
 </div>
 </section>
 </div>
-</form>
+</div>
 <!-- inclusione jquery-->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 

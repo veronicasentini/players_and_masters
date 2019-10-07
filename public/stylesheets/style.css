@@ -234,14 +234,14 @@ select#valore-statistiche {
     margin-top: 20px;
 }
 
-div.filtri {
+.filtri {
     width: 25%;
     float: left;
     border-style: solid;
     border-width: 0.5px;
 }
 
-div#risultato {
+#risultato {
     float: left;
     background-color: brown;
     width: 75%;
@@ -548,7 +548,10 @@ STYLE PER I MOBILE
         margin-right: 0;
     }
     .filtri {
-        display: none;
+        width: 45%;
+    }
+    #risultato {
+        width: 55%;
     }
     .bottone-agg-pg {
         width: 40%;
