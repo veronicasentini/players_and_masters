@@ -3,37 +3,37 @@ var sqlite3 = require('sqlite3').verbose();
 const database = './players_and_masters.db';
 
 
-exports.addParty = function(req, res) {
+function addParty(req, res) {
 
-        var idMaster = req.session.user;
-        var nomeParty = req.body.nomeParty;
-        console.log(idMaster);
-        console.log(nomeParty);
-        let db = new sqlite3.Database(database);
+    var idMaster = req.session.user;
+    var nomePartyMaster = req.body.nomeParty;
+    console.log(idMaster);
+    console.log(nomePartyMaster);
+    let db = new sqlite3.Database(database);
 
-        db.get(
-            'SELECT * FROM party WHERE name=? AND master=?',
-            nomeParty,
-            idMaster,
-            function(err, row) {
-                console.log(idMaster);
-                console.log(nomeParty);
-                if (row = !undefined) {
-                    console.log('party già esistente');
-                    res.redirect('/user/master');
-                } else {
+    db.get(
+        'SELECT * FROM party WHERE name=? AND master=?',
+        nomePartyMaster,
+        idMaster,
+        function(err, row) {
+            console.log(idMaster);
+            console.log(nomeParty);
+            if (row = !undefined) {
+                console.log('party già esistente');
+                res.redirect('/user/master');
+            } else {
+                console.log('nuovo party creato');
+                db.run('INSERT INTO party(name, master) VALUES (?,?) ',
+                    nomeParty,
+                    idMaster);
+                res.redirect('/user/master');
 
-                    db.run('INSERT INTO party(name, master) VALUES (?,?) ',
-                        nomeParty,
-                        idMaster);
-                    res.redirect('/user/master');
-
-                }
             }
-        );
-        db.close();
-    }
-    /*-----------------------------------------------------*/
+        }
+    );
+    db.close();
+}
+/*-----------------------------------------------------*/
 exports.searchPG = function(req, res, done) {
 
     //master che cerca un pg
@@ -194,3 +194,4 @@ exports.addPG = function(req, idpg, res, done) {
     );
 
 }
+module.exports.addParty = addParty;

@@ -12,10 +12,13 @@
 </div>
 <div class="contenuti">
 <div class="partyAttivi" > 
-<form id="griglia-personaggi" class="clearfix">
-  <form ><div class="creaParty" >
-  <p >Nome party: <input class="nomeParty" name="nomeParty"> <a href="/user/master/aggiungiParty" style="background-color: darkorange; border-color:black; border-weight:2px;">aggiungi Party</a></p></div>
- </form> 
+
+  <form method="POST" action="user/master/aggiungiParty"><div class="creaParty" >
+  <p>Nome party: <input class="nomeParty" name="nomePartyMaster"> 
+  <!--<a href="/user/master/aggiungiParty" style="background-color: darkorange; border-color:black; border-weight:2px;">aggiungi Party</a>-->
+  </p> <button type="submit" class="bottone-agg-party">aggiungi party</button></div>
+ </form>
+  <form id="griglia-personaggi" class="clearfix">
  <div id="intestazioneForm">
     <p >party attivi</p>
 </div>
@@ -28,6 +31,7 @@
     </tr>
   </tbody>
 </table>
+</form>
 </div>
 <div class="aggiungiUserRicerca " >
   <form id="ricerca" class="clearfix">
@@ -98,7 +102,7 @@
         
         </tr>
         <tbody>
-		<tr><td>cell</td><td>cell</td><td>cell</td></tr>
+	
 	</tbody>
 	</thead>
   </table>
