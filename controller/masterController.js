@@ -35,80 +35,60 @@ function addParty(req, res) {
     db.close();
 }
 exports.loadParty = function(req, res, done) {
-        var masterId = req.session.user;
+    var masterId = req.session.user;
 
-        let db = new sqlite3.Database(database);
-        db.all('SELECT * FROM party WHERE master=?',
-            masterId,
-            function(err, rows) {
-                console.log(rows);
-                res.render('master/masterhome', {
-                    partyAttivi: rows
-                });
-
+    let db = new sqlite3.Database(database);
+    db.all('SELECT * FROM party WHERE master=?',
+        masterId,
+        function(err, rows) {
+            console.log(rows);
+            res.render('master/masterhome', {
+                partyAttivi: rows
             });
 
-        db.close();
-    }
-    /*-----------------------------------------------------*/
+        });
+
+    db.close();
+};
+
 exports.searchPG = function(req, res, done) {
 
     //master che cerca un pg
+    let db = new sqlite3.Database(database);
 
-    var nomepg = req.body.nomepg;
-    var nomeplayer = req.body.usernamePlayer;
-    var num;
-
-    db.all(
-        'SELECT * FROM user_characters JOIN characters.id = user_characters.char_id JOIN users.id = user_character.user_id WHERE characters.name = ? OR users.name = ?, user_character.user_id != ?',
-        nomepg,
+    var nomeplayer = req.body.username;
+    var idMaster = req.session.user;
+    db.all('SELECT * FROM users_characters JOIN users ON users.id = users_character.user_id WHERE users.name = ? AND user_character.user_id != ?',
         nomeplayer,
-        req.session.user,
+        idMaster,
 
-        function(rows) {
-            num = rows.lenght;
-            var risultati = newArray(num)(2);
+        function(err, rows) {
+            if (rows != undefined) {
+                db.all('SELECT * FROM characters JOIN users_characters ON characters.id=users_characters.char_id WHERE users_characters.user_id=?',
+                    rows.user_id,
+                    function(err, rows) {
+                        res.render('/master/masterhome', {
+                            personaggiCercati: rows
 
-            for (i = 0; i < num; i++) {
+                        });
 
-                db.get(
-                    'SELECT * FROM characters WHERE id = ?',
-                    rows[i].char_id,
-                    function(row) {
-                        risultati[i][0] = row.name;
                     }
                 )
-
-                db.get(
-                    'SELECT * FROM users WHERE id = ?',
-                    rows[i].user_id,
-                    function(row) {
-                        risultati[i][1] = row.name;
-                    }
-                )
-            };
-
-            var table = document.getElementById("nonPosseduti");
-
-            for (i = 0; i < num; i++) {
-                table += "<tr>";
-                table += "<tc>" + risultati[i][0] + "</tc>";
-                table += "<tc>" + risultati[i][1] + "</tc>";
-                table += "<button onclick = addPGParty(req, risultati[i][0],risultati[i][1], res, done)>" + "+" + "</button>";
-                table += "</tr>";
+            } else if (nomePlayer == '') {
+                console.log('campo player vuoto');
+                res.redirect('/master/mastehome');
+            } else {
+                console.log('row undefined')
+                res.redirect('/master/masterhome')
             }
-
-            table += "</table>";
-
-            document.getElementById("nomedelluogoincuiposizionarelatabella").innerHTML = table;
-
         }
-
-    );
+    )
 
 };
 
-exports.addPGParty = function(req, pgriga, playerriga, res, done) {
+
+
+exports.addPGParty = function(req, res) {
 
     //aggiunta di un pg ad un party
 
@@ -119,6 +99,7 @@ exports.addPGParty = function(req, pgriga, playerriga, res, done) {
     var id_party;
     var id_player;
     var id_pg;
+
 
     db.get(
         'SELECT * FROM party WHERE name = ?, master = ?',

@@ -5,7 +5,7 @@
     <div class="menumaster"> 
  <ul>
     <li class="menu-item collezioneParty">Party attivi</li>
-    <li class="menu-item aggiungiUser">Crea party</li>
+    <li class="menu-item aggiungiUser">Ricerca pg</li>
     <li class="menu-item schedePers">Schede Personaggi</li>
 
   </ul>
@@ -34,7 +34,7 @@
 </table>
 </div>
 </form>
-<div class="aggiungiUserRicerca " >
+<form class="aggiungiUserRicerca " >
   <div id="ricerca" class="clearfix">
     <div id="intestazioneForm" style="font-size:25px" >Ricerca players</div>
    <div class="filtri all_orizz" style="background-color:rgba(240, 248, 255, 0.5); ">
@@ -42,12 +42,10 @@
        <p style="font-weight: bold; font-size:20px">FILTRI</p>
 
   <!-- CASELLE DI TESTO -->
- <p style="font-style: italic; font-size:18px; ">Nome Party<br>
-  <input type="text" class="mail-password" name="nameParty"></p>
+
  <p style="font-style: italic; font-size:18px; ">Nome Utente<br>
   <input type="text" class="mail-password" name="username"></p>
-  <p style="font-style: italic; font-size:18px; ">Personaggio<br>
-  <input type="text" class="mail-password" name="personaggio"></p>
+  
   <!-- CHECKBOX -->
   <!--<p style="font-style: italic; font-size:18px; ">Classe</p>-->
 
@@ -58,10 +56,13 @@
 <div id="risultato"  class="all_orizz risultato">
   <table class="risultato_mostrato" >
       <thead >
-		<tr style="background-color: brown"><th>User</th>
+		<tr style="background-color: brown">
+      <th>User</th>
         <th>personaggio</th>
         
         </tr>	</thead>
+       
+        
         <tbody style="background-color: rgba(240, 248, 255, 0.5);">
 	<tr class="partyAttivo"></tr>
 	</tbody>
@@ -69,7 +70,7 @@
   </table>
 </div>
 
-</div> </div>
+</div> </form>
 <section class="cards clearfix" >
   <div id="intestazioneForm">
     <p> Schede Personaggi</p>

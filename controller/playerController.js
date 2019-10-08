@@ -27,14 +27,14 @@ exports.addPG = function(req, res) {
                         if (row != undefined) {
                             console.log(row);
                             console.log('pg già posseduto');
-                            res.redirect('/player/playerhome');
+                            res.redirect('/user/player');
 
                             //db.run('INSERT INTO users_character(user_id, char_id) VALUES (?, ?);', id_player, id_pg)
 
                         } else {
                             console.log('pg non posseduto');
                             db.run('INSERT INTO users_characters (user_id, char_id) VALUES (?,?);', id_player, id_Pg);
-                            res.redirect('/player/playerhome');
+                            res.redirect('/user/player');
 
                             // return done(null, false, { message: 'Personaggio selezionato già aggiunto alla collezione' })
 
@@ -43,7 +43,7 @@ exports.addPG = function(req, res) {
                 );
             } else {
                 console.log('pg inesistente')
-                res.redirect('/player/home');
+                res.redirect('/user/player');
             }
         }
     );
@@ -53,22 +53,4 @@ exports.addPG = function(req, res) {
 
     //res ricarica la pagina eliminando il pg appena aggiunto
 
-}
-
-exports.loadPGPoss = function(req, res) {
-    let db = new sqlite3.Database(database);
-    var user_id = req.session.user;
-
-    db.all('SELECT * FROM characters JOIN users_characters ON characters.id=users_characters.char_id WHERE users_characters.user_id=?',
-        user_id,
-        function(err, rows) {
-            console.log(rows);
-            console.log('user_id in loadPGposs' + user_id);
-            res.render('/player', {
-                pgPosseduto: rows
-            });
-
-        });
-
-    db.close();
 }

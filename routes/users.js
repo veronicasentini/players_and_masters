@@ -6,6 +6,7 @@ const userController = require('../controller/userController');
 /* GET users listing. */
 const playerController = require('../controller/playerController');
 const masterController = require('../controller/masterController');
+
 var checkAuthentication = function(req, res, next) {
     if (req.session && req.session.user) {
         next();
@@ -20,7 +21,7 @@ router.get('/player', checkAuthentication, userController.loadPG);
 router.post('/player/aggiungiPg', playerController.addPG);
 
 router.post('/master/aggiungiParty', masterController.addParty);
-
+//router.post('/master/ricercaPg', masterController.searchPG);
 router.get('/master', checkAuthentication, masterController.loadParty);
 
 
